@@ -1,0 +1,23 @@
+[master-green]
+master-green-node1 ansible_host=192.168.1.71
+
+[workers-green]
+worker-green-node1 ansible_host=192.168.1.72
+worker-green-node2 ansible_host=192.168.1.73
+
+[proxy-green]
+proxy-green-node1 ansible_host=192.168.1.70
+
+[master-blue]
+master-blue-node1 ansible_host=192.168.1.81
+
+[workers-blue]
+worker-blue-node1 ansible_host=192.168.1.82
+worker-blue-node2 ansible_host=192.168.1.83
+
+[proxy-blue]
+proxy-blue-node1 ansible_host=192.168.1.80
+
+[Proxmox-server]
+pve ansible_host=192.168.1.2
+
