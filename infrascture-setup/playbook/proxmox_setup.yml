@@ -23,7 +23,7 @@
         var: node_vms
 
 - name: Proxmox VM setup and configuration
-  hosts: Proxmox-server
+  hosts: pve
   gather_facts: no
   vars:
     proxmox_api_url: "{{ hostvars['localhost']['vm_config']['PROXMOX_API_URL'] }}"
@@ -38,8 +38,13 @@
       loop: "{{ hostvars['localhost']['node_vms'] }}"
       delegate_to: pve
 
+    - name: Save node_vms to pve
+      set_fact:
+        node_vms: "{{ hostvars['localhost']['node_vms'] }}"
+      run_once: true
+
     - name: Start and configure VMs one by one
       include_tasks: configure_vm.yml
-      loop: "{{ hostvars['localhost']['node_vms'] }}"
+      loop: "{{ node_vms }}"
       loop_control:
         loop_var: node
