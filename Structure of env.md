@@ -9,3 +9,9 @@
 192.168.1.81  worker-blue-node1
 192.168.1.82  worker-blue-node2
 192.168.1.83  proxy-blue-node1
+
+
+## TASKS COMPLETED
+1. Deployed vms
+2. Configured ip and dns
+3. install k8s

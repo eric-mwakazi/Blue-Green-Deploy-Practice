@@ -23,7 +23,7 @@
         var: node_vms
 
 - name: Proxmox VM setup and configuration
-  hosts: pve
+  hosts: Proxmox-server
   gather_facts: no
   vars:
     proxmox_api_url: "{{ hostvars['localhost']['vm_config']['PROXMOX_API_URL'] }}"
