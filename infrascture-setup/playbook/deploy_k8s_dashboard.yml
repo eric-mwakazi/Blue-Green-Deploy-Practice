@@ -1,6 +1,6 @@
 ---
 - name: Deploy a kubernetes dashboard.
-  hosts: proxy-blue, proxy-green
+  hosts: proxy_blue, proxy_green
   tasks:
     - name: Apply kubernetes dashboard manifests.
       kubernetes.core.k8s:

@@ -1,5 +1,5 @@
 - name: Create K8S resource
-  hosts: proxy-blue, proxy-green
+  hosts: proxy_blue, proxy_green
   tasks:
     - name: Ensure pip is installed
       apt:

@@ -1,5 +1,5 @@
 - name: Delploy a simple Nginx app.
-  hosts: proxy-blue, proxy-green
+  hosts: proxy_blue, proxy_green
   tasks:
     - name: Create a deployment.
       kubernetes.core.k8s:

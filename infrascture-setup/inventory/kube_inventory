@@ -1,23 +1,72 @@
-[master-green]
+[master_green]
 master-green-node1 ansible_host=192.168.1.71
 
-[workers-green]
+[workers_green]
 worker-green-node1 ansible_host=192.168.1.72
 worker-green-node2 ansible_host=192.168.1.73
 
-[proxy-green]
+[proxy_green]
 proxy-green-node1 ansible_host=192.168.1.70
 
-[master-blue]
+[master_blue]
 master-blue-node1 ansible_host=192.168.1.81
 
-[workers-blue]
+[workers_blue]
 worker-blue-node1 ansible_host=192.168.1.82
 worker-blue-node2 ansible_host=192.168.1.83
 
-[proxy-blue]
+[proxy_blue]
 proxy-blue-node1 ansible_host=192.168.1.80
 
-[Proxmox-server]
+[Proxmox_Sserver]
 pve ansible_host=192.168.1.2
+
+##### Future structure  #####
+; [masters]
+; master-green-node1 ansible_host=192.168.1.71
+; master-blue-node1 ansible_host=192.168.1.81
+
+; [workers]
+; worker-green-node1 ansible_host=192.168.1.72
+; worker-green-node2 ansible_host=192.168.1.73
+; worker-blue-node1 ansible_host=192.168.1.82
+; worker-blue-node2 ansible_host=192.168.1.83
+
+; [proxies]
+; proxy-green-node1 ansible_host=192.168.1.70
+; proxy-blue-node1 ansible_host=192.168.1.80
+
+; [master-green]
+; master-green-node1
+
+; [workers-green]
+; worker-green-node1
+; worker-green-node2
+
+; [proxy-green]
+; proxy-green-node1
+
+; [master-blue]
+; master-blue-node1
+
+; [workers-blue]
+; worker-blue-node1
+; worker-blue-node2
+
+; [proxy-blue]
+; proxy-blue-node1
+
+; [Proxmox-server]
+; pve ansible_host=192.168.1.2
+
+; # Grouping for all green and blue environments (optional)
+; [green-environment:children]
+; master-green
+; workers-green
+; proxy-green
+
+; [blue-environment:children]
+; master-blue
+; workers-blue
+; proxy-blue
 

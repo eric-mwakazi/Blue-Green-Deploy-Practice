@@ -1,5 +1,5 @@
 - name: Kubernetes Dependencies
-  hosts: master-green, workers-green, proxy-green, master-blue, workers-blue, proxy-blue
+  hosts: master_green, workers_green, proxy_green, master_blue, workers_blue, proxy_blue
   become: yes
   tasks:
     - name: Updates
@@ -140,7 +140,7 @@
     - name: Reboot
       reboot:
 
-- hosts: master
+- hosts: master_green, master_blue
   become: yes
   tasks:
     - name: Install Kubectl
