@@ -1,8 +1,0 @@
-# Rename this to terraform.tfvars
-pm_api_url = "https://PROXMOX_IP:8006/api2/json"
-pm_api_token_secret = "your_pm_api_token_secret"
-pm_api_token_id = "root@pam!vm-deployer"
-ssh_keys = [
-"ssh-rsa ...",
-"ssh-rsa ..."
-]
