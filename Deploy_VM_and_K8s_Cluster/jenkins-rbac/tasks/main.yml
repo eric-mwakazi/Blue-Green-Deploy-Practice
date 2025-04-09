@@ -1,0 +1,55 @@
+---
+# tasks file for jenkins-rbac
+- name: Ensure pip is installed
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Install Kubernetes Python library
+  pip:
+    name:
+      - kubernetes
+
+- name: Create webapps namespace
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    api_version: v1
+    kind: Namespace
+    name: webapps
+    state: present
+  environment:
+    KUBECONFIG: "{{ kubeconfig_path }}"
+
+- name: Create webapps namespace
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    api_version: v1
+    kind: Namespace
+    name: webapps
+    state: present
+  environment:
+    KUBECONFIG: "{{ kubeconfig_path }}"
+
+- name: >-
+    Apply Service Account, Role, RoleBinding, ClusterRole, and
+    ClusterRoleBinding
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    definition: "{{ lookup('file', manifests_path ~ '/jenkins_rbac.yaml')}}"
+  environment:
+    KUBECONFIG: "{{ kubeconfig_path }}"
+
+- name: Generate token for Jenkins service account
+  shell: |
+    kubectl create token jenkins --namespace webapps
+  register: jenkins_token
+  environment:
+    KUBECONFIG: "{{ kubeconfig_path }}"
+
+- name: Save token to {{ token_location }}
+  copy:
+    content: '{{ jenkins_token.stdout }}'
+    dest: "{{ token_location }}"
+    owner: eric
+    mode: '0600'
