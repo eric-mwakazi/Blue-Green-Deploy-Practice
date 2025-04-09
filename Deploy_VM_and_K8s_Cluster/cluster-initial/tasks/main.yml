@@ -18,7 +18,7 @@
   copy:
     content: ''
     dest: /etc/kubernetes/kubeadm-config.yaml
-    force: 'no'
+    force: no
   when: "'masters' in group_names"
 
 # Configure container runtime settings
@@ -29,7 +29,7 @@
       kind: ClusterConfiguration
       apiVersion: kubeadm.k8s.io/v1beta3
       networking:
-        podSubnet: "10.244.0.0/16"
+        podSubnet: "{{ pod_subnet }}"
       ---
       kind: KubeletConfiguration
       apiVersion: kubelet.config.k8s.io/v1beta1
@@ -42,15 +42,17 @@
         cpu: 100m
         memory: 50M
       enforceNodeAllocatable:
-      - pods
+        - pods
   when: "'masters' in group_names"
 
 # Ensure log directory exists
 - name: Ensure log directory exists
   file:
-    path: "/home/{{ kube_user }}/{{ inventory_hostname }}_logs"
+    path: "/home/{{ kube_user }}/{{ inventory_hostname }}"
     state: directory
     mode: '0755'
+    owner: "{{ kube_user }}"
+    group: "{{ kube_user }}"
   when: "'masters' in group_names"
 
 # Initialize the Kubernetes cluster
@@ -112,26 +114,29 @@
     mode: '0700'
   when: "'workers' in group_names or 'proxies' in group_names"
 
-# Set KUBECONFIG for normal user
+# Set KUBECONFIG in .bashrc for user {{ kube_user }}
 - name: Set KUBECONFIG in .bashrc for user {{ kube_user }}
   lineinfile:
     path: "/home/{{ kube_user }}/.bashrc"
     line: "export KUBECONFIG=/home/{{ kube_user }}/.kube/config"
     create: yes
 
+# Apply KUBECONFIG for user {{ kube_user }}
 - name: Apply KUBECONFIG for user {{ kube_user }}
   shell: "source /home/{{ kube_user }}/.bashrc"
   args:
     executable: /bin/bash
 
-# Set KUBECONFIG for root user
+# Set KUBECONFIG in .bashrc for root
 - name: Set KUBECONFIG in .bashrc for root
   lineinfile:
     path: "/root/.bashrc"
     line: "export KUBECONFIG=/etc/kubernetes/admin.conf"
     create: yes
 
+# Apply KUBECONFIG for root user
 - name: Apply KUBECONFIG for root user
   shell: ". /root/.bashrc"
   args:
     executable: /bin/bash
+

@@ -32,7 +32,7 @@
 
 # tasks file for Join all workers to their respective masters(Green & Blue)
  - name: Join all workers to their respective masters(Green & Blue)
-   hosts: masters
+   hosts: masters, workers
    become: yes
    roles:
     - node-join

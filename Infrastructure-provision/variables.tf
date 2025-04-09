@@ -30,27 +30,13 @@ variable "START_VMID" {
   description = "Unique VM ID"
   default = 799
 }
-# variable "cipassword" {
-#   description = "Password for the VM user"
-#   type        = string
-#   sensitive   = true
-# }
-
 
 variable "master_count" {
   default = 1
 }
 
-# variable "bastion_count" {
-#   default = 1
-# }
-
 variable "worker_count" {
   default = 2
-}
-
-variable "proxy_count" {
-  default = 1
 }
 
 variable "devops_vm" {

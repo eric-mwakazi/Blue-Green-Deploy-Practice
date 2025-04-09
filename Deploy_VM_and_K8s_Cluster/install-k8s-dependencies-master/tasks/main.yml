@@ -147,12 +147,12 @@
     state: present
     reload: yes
 
-- name: Reboot
-  reboot:
-
 - name: Install Kubectl
   apt:
     name: kubectl=1.29.*
     state: present
     force: yes
+
+- name: Reboot
+  reboot:
 
