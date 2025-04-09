@@ -62,7 +62,14 @@ Follow these steps on **both** master and worker nodes:
 - SonarQube: http://DevOps-VM-IP:9000
 - Kubernetes cluster (master + worker) is ready
 - All services restart on VM reboot (via Docker `--restart=always`)
+#### Jenkins Dashboard
+ <img src='./images/jenkins-dash.png'>
 
+#### Sonarqube Dashboard
+ <img src='./images/sonarqube.png'>
+
+#### Nexus Dashboard
+ <img src='./images/nexus.png'>
 ---
 ## 🚀 All Jenkins Configurations
 Detailed walkthrough Link here: [Manuals/conf_jenkins.md](Manuals/conf_jenkins.md)
