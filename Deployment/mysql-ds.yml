@@ -1,9 +1,22 @@
+# PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  namespace: webapps
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
 ---
-# MySQL Deployment with Resource Requests
+# MySQL Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: webapps
 spec:
   selector:
     matchLabels:
@@ -16,8 +29,8 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql:8
-        name: mysql
+      - name: mysql
+        image: mysql:8
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: "Test@123"
@@ -25,7 +38,6 @@ spec:
           value: "bankappdb"
         ports:
         - containerPort: 3306
-          name: mysql
         resources:
           requests:
             memory: "1Gi"
@@ -33,14 +45,24 @@ spec:
           limits:
             memory: "2Gi"
             cpu: "1000m"
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
 ---
 # MySQL Service
 apiVersion: v1
 kind: Service
 metadata:
   name: mysql-service
+  namespace: webapps
 spec:
   ports:
   - port: 3306
+    targetPort: 3306
   selector:
     app: mysql
+

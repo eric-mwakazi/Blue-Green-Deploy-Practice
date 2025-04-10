@@ -117,9 +117,44 @@ Configure Kubernetes cluster credentials and service token.
 
 Add DockerHub and GitLab credentials in Jenkins Credentials store.
 
+### Run the pipeline
+<img src='./images/build.png'>
+<img src='./images/progress0.png'>
+<img src='./images/final.png'>
 
+## ✅ Testing and Verification
+Once the application is deployed, you can verify that everything is running correctly by checking the status of the services and pods on the master node.
 
+Run the following commands:
+```bash
+kubectl get svc -n webapps -o wide
+kubectl get po -n webapps -o wide
+```
+* Look for the NodePort exposed by the service. You can then open a browser and navigate to:
+```php-template
+http://<any-node-ip>:<NodePort>
+```
+If everything is working correctly, you should see the web application's homepage.
+<img src='./images/login.png'>
 
+### 🛠️ Application Debugging
+If the app doesn't load as expected. We you're troubleshoot:
+
+Check the application logs:
+```bash
+kubectl logs -n webapps <pod-name>
+```
+Access a running container (e.g., MySQL) for deeper inspection:
+```bash
+kubectl exec -it -n webapps <pod-name> -- /bin/bash
+```
+This allows you to investigate logs, check configuration files, or manually test connectivity between containers.
+
+### 🧩 Sonarqube code reviews
+<img src='./images/sonar-analysis.png'>
+
+### 🧩 Nexus snapshots verification
+<img src='./images/nexus-snaps.png'>
 
 ## 🚀 References:
 * YouTube Video Link To follow along: [https://www.youtube.com/watch?v=tstBG7RC9as&t=2759s](https://www.youtube.com/watch?v=tstBG7RC9as&t=2759s)
