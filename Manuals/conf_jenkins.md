@@ -20,7 +20,7 @@ Jenkins plugins enhance the functionality of Jenkins to support various use case
 
 ## ⚙️ Connecting Jenkins to Kubernetes Cluster
 Follow these steps on **Jenkins Dashboard** server:
-* Manual Link: [Manuals/jenkins_rbac_guidlines.md](Manuals/jenkins_rbac_guidlines.md)
+* Manual Link: [jenkins_rbac_guidlines.md](jenkins_rbac_guidlines.md)
 
 ## 🔐 Adding Secret Tokens to Jenkins
 To integrate GitLab and DockerHub securely with Jenkins pipelines, you need to store your access tokens as credentials. Here's how to create and add GitLab and DockerHub tokens to Jenkins using the Username and Password credential type, with "Treat username as a secret" enabled.

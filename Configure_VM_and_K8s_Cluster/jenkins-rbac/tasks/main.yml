@@ -20,19 +20,49 @@
   environment:
     KUBECONFIG: "{{ kubeconfig_path }}"
 
-- name: Create webapps namespace
+- name: Create ClusterRole for Jenkins to access PersistentVolumes
   kubernetes.core.k8s:
     kubeconfig: "{{ kubeconfig_path }}"
-    api_version: v1
-    kind: Namespace
-    name: webapps
+    api_version: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    name: jenkins-cluster-role
     state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: jenkins-cluster-role
+      rules:
+        - apiGroups: [""]
+          resources: ["persistentvolumes"]
+          verbs: ["get", "list", "create", "delete", "update"]
   environment:
     KUBECONFIG: "{{ kubeconfig_path }}"
 
-- name: >-
-    Apply Service Account, Role, RoleBinding, ClusterRole, and
-    ClusterRoleBinding
+- name: Create ClusterRoleBinding for Jenkins
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    api_version: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    name: jenkins-cluster-role-binding
+    state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: jenkins-cluster-role-binding
+      subjects:
+        - kind: ServiceAccount
+          name: jenkins
+          namespace: webapps
+      roleRef:
+        kind: ClusterRole
+        name: jenkins-cluster-role
+        apiGroup: rbac.authorization.k8s.io
+  environment:
+    KUBECONFIG: "{{ kubeconfig_path }}"
+
+- name: Apply Service Account, Role, RoleBinding, ClusterRole, and ClusterRoleBinding
   kubernetes.core.k8s:
     kubeconfig: "{{ kubeconfig_path }}"
     state: present

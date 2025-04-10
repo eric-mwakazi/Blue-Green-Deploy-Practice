@@ -70,6 +70,7 @@ Follow these steps on **both** master and worker nodes:
 
 #### Nexus Dashboard
  <img src='./images/nexus.png'>
+ 
 ---
 ## 🚀 All Jenkins Configurations
 Detailed walkthrough Link here: [Manuals/conf_jenkins.md](Manuals/conf_jenkins.md)
@@ -131,12 +132,14 @@ kubectl get svc -n webapps -o wide
 kubectl get po -n webapps -o wide
 ```
 * Look for the NodePort exposed by the service. You can then open a browser and navigate to:
+<img src='./images/pods.png'>
+
 ```php-template
 http://<any-node-ip>:<NodePort>
 ```
 If everything is working correctly, you should see the web application's homepage.
 <img src='./images/login.png'>
-
+<img src='./images/home.png'>
 ### 🛠️ Application Debugging
 If the app doesn't load as expected. We you're troubleshoot:
 

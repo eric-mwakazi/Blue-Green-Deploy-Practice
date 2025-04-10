@@ -35,7 +35,7 @@ kubectl cluster-info | grep 'Kubernetes control plane' | awk '/https/ {print $NF
 scp k8s-ca.crt eric@jenkins:/home/eric/
 ```
 
-2. **Import the CA Certificate to Jenkins' Java Keystore:**
+2. **Import the CA Certificate to Jenkins' Java Keystore inside jenkins server:**
 ```bash
 sudo keytool -import -trustcacerts -keystore $(sudo find /usr/lib/jvm -name "cacerts") -storepass changeit -noprompt -alias k8s-cluster -file /home/eric/k8s-ca.crt
 ```

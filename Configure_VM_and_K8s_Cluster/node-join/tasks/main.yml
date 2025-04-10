@@ -1,3 +1,8 @@
+- name: Create Directory /mnt/data/mysql for storage class on all nodes
+  shell: |
+    sudo mkdir -p /mnt/data/mysql && sudo chmod -R 777 /mnt/data/mysql
+  creates: /mnt/data/mysql
+
 - name: Generate kubeadm join command on the master node
   shell: kubeadm token create --print-join-command
   register: join_command_raw
