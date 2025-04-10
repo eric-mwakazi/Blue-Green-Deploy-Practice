@@ -45,7 +45,7 @@ Follow these steps on **DEVOPS-VM**:
 ## ⚙️ Kubernetes Cluster Setup Instructions
 ### 📽️Deploy with Ansible at once
 Follow these steps on **both** master and worker nodes:
-* Manual Link: [Deploy_VM_and_K8s_Cluster/README.md](Deploy_VM_and_K8s_Cluster/README.md)
+* Manual Link: [Configure_VM_and_K8s_Cluster/README.md](Configure_VM_and_K8s_Cluster/README.md)
 
 ## OR install manually: 
 ### ☸️ Kubernetes Cluster Setup (Master & Worker Nodes)

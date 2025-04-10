@@ -1,0 +1,53 @@
+---
+# task file for time sync
+ - name: Time synchronization
+   hosts: all
+   gather_facts: no
+   become: yes
+   roles:
+     - time-sync
+
+# task file for Install Kubernetes Dependencies in all master nodes
+ - name: Install Kubernetes Dependencies in all master nodes
+   hosts: masters
+   gather_facts: yes
+   become: yes
+   roles:
+     - install-k8s-dependencies-master
+
+# task file for Install Kubernetes Dependencies in all worker nodes
+ - name: Install Kubernetes Dependencies in all worker nodes
+   hosts: workers
+   gather_facts: yes
+   become: yes
+   roles:
+     - install-k8s-dependencies-workers
+
+# tasks file for Setup Kubernetes Clusters (Green & Blue)
+ - name: Setup Kubernetes Clusters (Green & Blue)
+   hosts: masters
+   become: yes
+   roles:
+    - cluster-initial
+
+# tasks file for Join all workers to their respective masters(Green & Blue)
+ - name: Join all workers to their respective masters(Green & Blue)
+   hosts: masters, workers
+   become: yes
+   roles:
+    - node-join
+
+
+# tasks file for:
+# Create namespace
+# Create_and_expose_nginx,
+# Deploy a kubernetes dashboard
+# Setup Jenkins Service Account and Roles
+ - name: Create namespaces, Create_and_expose_nginx, Deploy a kubernetes dashboard,Setup Jenkins
+   hosts: masters
+   become: yes
+   roles:
+    - create_namespaces
+    - create_and_expose_nginx
+    - deploy-k9s-dashboard
+    - jenkins-rbac
