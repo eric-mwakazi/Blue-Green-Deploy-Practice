@@ -1,3 +1,0 @@
----
-# vars file for node-join
-kube_user: 'eric'

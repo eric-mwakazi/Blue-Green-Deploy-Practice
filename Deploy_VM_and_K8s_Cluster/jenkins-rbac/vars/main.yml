@@ -1,5 +1,0 @@
----
-# vars file for jenkins-rbac
-kubeconfig_path: /home/eric/.kube/config
-manifests_path: manifests
-token_location: /home/eric/jenkins_token.txt

@@ -1,6 +1,0 @@
----
-# handlers file for time-sync
-- name: Restart NTP
-  service:
-    name: ntp
-    state: restarted

@@ -1,5 +1,0 @@
----
-# vars file for cluster-initial
-kube_user: eric
-pod_subnet: "10.244.0.0/16"
-
