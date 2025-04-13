@@ -1,7 +1,7 @@
 
 # 💙💚 Blue-Green-Deploy-Practice
 
-This project demonstrates a Blue-Green Deployment strategy using Kubernetes and CI/CD tools. It uses Jenkins for automation, Nexus for artifact storage, and SonarQube for static code analysis — all running as Docker containers for portability and reliability.
+This project demonstrates a Blue-Green Deployment strategy using Kubernetes and modern CI/CD tools. It uses Terraform to provision infrastructure and Ansible to configure and automate the Kubernetes cluster setup. Jenkins handles the CI/CD pipeline, Nexus serves as the artifact repository, and SonarQube performs static code analysis — all running as Docker containers for portability and reliability.
 
 ---
 
